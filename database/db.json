@@ -47,6 +47,24 @@
       "course": "Calculus",
       "grade": 85,
       "id": 8
+    },
+    {
+      "name": "99",
+      "course": "99",
+      "grade": 99,
+      "id": 9
+    },
+    {
+      "name": "Keith",
+      "course": "Algebra",
+      "grade": 99,
+      "id": 10
+    },
+    {
+      "name": "Shorty",
+      "course": "Dog School",
+      "grade": 100,
+      "id": 11
     }
   ]
 }

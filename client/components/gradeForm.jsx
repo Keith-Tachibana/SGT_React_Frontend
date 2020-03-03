@@ -8,9 +8,6 @@ class GradeForm extends Component {
       course: '',
       grade: ''
     };
-    this.nameInput = React.createRef();
-    this.courseInput = React.createRef();
-    this.gradeInput = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleReset = this.handleReset.bind(this);
@@ -28,11 +25,11 @@ class GradeForm extends Component {
     this.clearFields();
   }
 
-  handleChange() {
+  handleChange(event) {
+    const target = event.target;
+    const name = target.name;
     this.setState({
-      name: this.nameInput.current.value,
-      course: this.courseInput.current.value,
-      grade: parseInt(this.gradeInput.current.value)
+      [name]: target.value
     });
   }
 
@@ -69,7 +66,6 @@ class GradeForm extends Component {
                 value={this.state.name}
                 required="required"
                 onChange={this.handleChange}
-                ref={this.nameInput}
               />
               <small className="text-muted form-text w-100 ml-4">Please enter a valid student name</small>
             </div>
@@ -86,7 +82,6 @@ class GradeForm extends Component {
                 value={this.state.course}
                 required="required"
                 onChange={this.handleChange}
-                ref={this.courseInput}
               />
               <small className="text-muted form-text w-100 ml-4">Please enter a valid course name</small>
             </div>
@@ -103,7 +98,6 @@ class GradeForm extends Component {
                 value={this.state.grade}
                 required="required"
                 onChange={this.handleChange}
-                ref={this.gradeInput}
                 min="0"
                 max="100"
               />

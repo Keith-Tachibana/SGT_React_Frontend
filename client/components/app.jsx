@@ -23,7 +23,7 @@ class App extends React.Component {
 
   async getGrades() {
     try {
-      const response = await fetch('http://localhost:3001/api/grades');
+      const response = await fetch('/api/grades');
       const grades = await response.json();
       this.setState({
         grades
@@ -37,7 +37,7 @@ class App extends React.Component {
     try {
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      const response = await fetch('http://localhost:3001/api/grades', {
+      const response = await fetch('/api/grades', {
         method: 'POST',
         body: JSON.stringify(newEntry),
         headers
