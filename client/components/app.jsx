@@ -44,11 +44,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 mt-4">
-            <Header className="text-success pl-2" averageGrade={this.getAverageGrade()} />
-          </div>
-        </div>
+        <Header className="text-success pl-2" averageGrade={this.getAverageGrade()} />
         <GradeTable grades={this.state.grades} />
       </React.Fragment>
     );
