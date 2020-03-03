@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 
 class Grade extends Component {
+  constructor(props) {
+    super(props);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(event) {
+    const { deleteGrade, id } = this.props;
+    deleteGrade(id);
+  }
 
   render() {
-    const { grades } = this.props;
+    const { name, course, grade } = this.props;
     return (
       <React.Fragment>
-        {grades.map(grade => {
-          return (
-            <tr key={grade.id}>
-              <td>{grade.name}</td>
-              <td>{grade.course}</td>
-              <td>{grade.grade}</td>
-            </tr>
-          );
-        })}
+        <tr>
+          <td>{name}</td>
+          <td>{course}</td>
+          <td>{grade}</td>
+          <td><button className="btn btn-danger float-right" onClick={this.handleDelete}><i className="fas fa-trash-alt"> Delete</i></button></td>
+        </tr>
       </React.Fragment>
     );
   }

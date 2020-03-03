@@ -1,70 +1,28 @@
 {
   "grades": [
     {
-      "id": 1,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 2,
-      "name": "Brendan Eich",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 3,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 100
+      "name": "Vicky",
+      "course": "Algebra",
+      "grade": 99,
+      "id": 1
     },
     {
       "name": "Keith",
-      "course": "Algebra",
-      "grade": 99,
-      "id": 4
+      "course": "Calculus",
+      "grade": 100,
+      "id": 2
     },
     {
       "name": "Vika",
       "course": "C++",
-      "grade": 85,
-      "id": 5
+      "grade": 77,
+      "id": 3
     },
     {
-      "name": "Viorika",
+      "name": "Uzair",
       "course": "Java",
       "grade": 88,
-      "id": 6
-    },
-    {
-      "name": "Vicky",
-      "course": "Assembly",
-      "grade": 56,
-      "id": 7
-    },
-    {
-      "name": "Vik",
-      "course": "Calculus",
-      "grade": 85,
-      "id": 8
-    },
-    {
-      "name": "99",
-      "course": "99",
-      "grade": 99,
-      "id": 9
-    },
-    {
-      "name": "Keith",
-      "course": "Algebra",
-      "grade": 99,
-      "id": 10
-    },
-    {
-      "name": "Shorty",
-      "course": "Dog School",
-      "grade": 100,
-      "id": 11
+      "id": 4
     }
   ]
 }

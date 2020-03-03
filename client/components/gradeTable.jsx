@@ -4,6 +4,19 @@ import Grade from './grade';
 
 class GradeTable extends Component {
   render() {
+    const data = Array.from(this.props.grades);
+    const studentGrades = data.map(grade => {
+      return (
+        <Grade
+          key={grade.id}
+          id={grade.id}
+          name={grade.name}
+          course={grade.course}
+          grade={grade.grade}
+          deleteGrade={this.props.deleteGrade}
+        />
+      );
+    });
     return (
       <React.Fragment>
         <div className="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 pl-4">
@@ -11,12 +24,15 @@ class GradeTable extends Component {
             <table className="table table-dark table-striped table-borderless table-hover">
               <caption className="pl-2">Student Grade Table by Keith Tachibana</caption>
               <thead className="bg-success">
-                <th scope="col">Student Name</th>
-                <th scope="col">Course</th>
-                <th scope="col">Grade</th>
+                <tr>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col" className="pr-4 text-right">Operations</th>
+                </tr>
               </thead>
               <tbody>
-                <Grade grades={this.props.grades} />
+                {this.props.grades.length === 0 ? <tr><td colSpan="4" className="text-center">{'No Grades Recorded'}</td></tr> : <>{studentGrades}</>}
               </tbody>
             </table>
           </div>
