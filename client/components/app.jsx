@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import React from 'react';
 
 import Header from './header';
@@ -15,6 +17,10 @@ class App extends React.Component {
     this.getGrades();
   }
 
+  componentDidUpdate() {
+    this.getAverageGrade();
+  }
+
   async getGrades() {
     try {
       const response = await fetch('http://localhost:3001/api/grades');
@@ -25,6 +31,16 @@ class App extends React.Component {
     } catch (error) {
       console.error(error.message);
     }
+  }
+
+  getAverageGrade() {
+    const { grades } = this.state;
+    let result = 0;
+    for (let i = 0; i < grades.length; i++) {
+      result += grades[i].grade;
+    }
+    const average = result / grades.length;
+    return average.toFixed(1);
   }
 
   render() {
