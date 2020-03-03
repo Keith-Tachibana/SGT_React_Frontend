@@ -9,7 +9,6 @@ class App extends React.Component {
     this.state = {
       grades: []
     };
-    this.getGrades = this.getGrades.bind(this);
   }
 
   componentDidMount() {
