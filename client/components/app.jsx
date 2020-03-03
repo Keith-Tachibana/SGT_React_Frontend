@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React from 'react';
 
 import Header from './header';
@@ -48,7 +46,7 @@ class App extends React.Component {
       <React.Fragment>
         <div className="row">
           <div className="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 mt-4">
-            <Header className="text-success pl-2" />
+            <Header className="text-success pl-2" averageGrade={this.getAverageGrade()} />
           </div>
         </div>
         <GradeTable grades={this.state.grades} />
