@@ -8,9 +8,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: []
+      grades: [],
+      currentlyEditing: null
     };
     this.addGrade = this.addGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +53,27 @@ class App extends React.Component {
     }
   }
 
+  async deleteGrade(id) {
+    try {
+      const { grades } = this.state;
+      const findIndex = grades.findIndex(grade => grade.id === id);
+      const gradesCopy = [...this.state.grades];
+      gradesCopy.splice(findIndex, 1);
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      await fetch(`/api/grades/${id}`, {
+        method: 'DELETE',
+        body: JSON.stringify(gradesCopy),
+        headers
+      });
+      this.setState({
+        grades: gradesCopy
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   getAverageGrade() {
     const { grades } = this.state;
     let result = 0;
@@ -68,8 +91,14 @@ class App extends React.Component {
         <Header averageGrade={this.getAverageGrade()} />
         <main>
           <div className="row">
-            <GradeTable grades={this.state.grades} />
-            <GradeForm addGrade={this.addGrade} />
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+            />
+            <GradeForm
+              addGrade={this.addGrade}
+              updateGrade={this.state.currentlyEditing}
+            />
           </div>
         </main>
       </React.Fragment>

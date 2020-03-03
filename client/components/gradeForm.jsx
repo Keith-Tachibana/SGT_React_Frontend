@@ -6,11 +6,16 @@ class GradeForm extends Component {
     this.state = {
       name: '',
       course: '',
-      grade: ''
+      grade: '',
+      operation: 'Add'
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleReset = this.handleReset.bind(this);
+  }
+
+  componentDidUpdate() {
+
   }
 
   handleSubmit(event) {
@@ -42,7 +47,8 @@ class GradeForm extends Component {
     const clearFields = {
       name: '',
       course: '',
-      grade: ''
+      grade: '',
+      operation: 'Add'
     };
     this.setState(clearFields);
   }
@@ -58,6 +64,7 @@ class GradeForm extends Component {
                 <i className="input-group-text fas fa-user-plus pt-2 ml-4"></i>
               </div>
               <input
+                autoFocus
                 type="text"
                 name="name"
                 className="form-control mr-4"
@@ -104,17 +111,16 @@ class GradeForm extends Component {
               <small className="text-muted form-text w-100 ml-4">Please enter a student grade from 0 to 100</small>
             </div>
             <button
-              type="reset"
-              onClick={this.handleReset}
-              className="btn btn-warning float-right mr-4"
-              name="cancel">
-                Cancel
+              type="submit"
+              className="ml-4 btn btn-success"
+              name="add">
+              Add
             </button>
             <button
-              type="submit"
-              className="btn btn-success float-right mr-4"
-              name="add">
-                Add
+              onClick={this.handleReset}
+              className="ml-4 btn btn-warning"
+              name="cancel">
+              Cancel
             </button>
           </form>
         </div>
