@@ -38,7 +38,8 @@ class App extends React.Component {
       result += grades[i].grade;
     }
     const average = result / grades.length;
-    return average.toFixed(1);
+    const displayAvg = isNaN(average) ? 'N/A' : average.toFixed(1);
+    return displayAvg;
   }
 
   render() {
