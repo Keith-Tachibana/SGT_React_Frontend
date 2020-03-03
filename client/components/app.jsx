@@ -57,12 +57,11 @@ class App extends React.Component {
       const { grades } = this.state;
       const findIndex = grades.findIndex(grade => grade.id === id);
       grades.splice(findIndex, 1);
-      const responseBody = JSON.stringify(grades);
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
       const response = await fetch(`http://localhost:3001/api/grades/${id}`, {
         method: 'DELETE',
-        responseBody,
+        body: JSON.stringify(grades),
         headers
       });
       const result = await response.json();
