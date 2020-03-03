@@ -60,14 +60,13 @@ class App extends React.Component {
       gradesCopy.splice(findIndex, 1);
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      const response = await fetch(`/api/grades/${id}`, {
+      await fetch(`/api/grades/${id}`, {
         method: 'DELETE',
         body: JSON.stringify(gradesCopy),
         headers
       });
-      const result = await response.json();
       this.setState({
-        grades: result
+        grades: gradesCopy
       });
     } catch (error) {
       console.error(error.message);

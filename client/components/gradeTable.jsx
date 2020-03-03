@@ -4,8 +4,7 @@ import Grade from './grade';
 
 class GradeTable extends Component {
   render() {
-    const data = Array.from(this.props.grades);
-    const studentGrades = data.map(grade => {
+    const studentGrades = this.props.grades.map(grade => {
       return (
         <Grade
           key={grade.id}
