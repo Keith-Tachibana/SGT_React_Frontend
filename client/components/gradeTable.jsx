@@ -29,7 +29,7 @@ class GradeTable extends Component {
                 <th scope="col" className="pr-4 text-right">Operations</th>
               </thead>
               <tbody>
-                {this.props.grades.length === 0 ? <tr><td>{'No grades recorded'}</td></tr> : <>{studentGrades}</>}
+                {this.props.grades.length === 0 ? <td colSpan="4" className="text-center">{'No Grades Recorded'}</td> : <>{studentGrades}</>}
               </tbody>
             </table>
           </div>

@@ -2,15 +2,15 @@
   "grades": [
     {
       "name": "Keith Tachibana",
-      "course": "Calculus",
-      "grade": 85,
+      "course": "Java",
+      "grade": 100,
       "id": 1
     },
     {
-      "name": "Vika",
+      "name": "Viorika",
       "course": "Assembly",
       "grade": 99,
-      "id": 3
+      "id": 2
     }
   ]
 }
