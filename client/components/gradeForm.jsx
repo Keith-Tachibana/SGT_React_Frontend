@@ -7,6 +7,7 @@ class GradeForm extends Component {
       name: '',
       course: '',
       grade: '',
+      id: null,
       update: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,19 +16,39 @@ class GradeForm extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    return null;
+    const { currentlyEditing } = this.props;
+    if (currentlyEditing !== prevProps.currentlyEditing) {
+      this.setState({
+        name: currentlyEditing.name,
+        course: currentlyEditing.course,
+        grade: currentlyEditing.grade,
+        id: currentlyEditing.id,
+        update: true
+      });
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const { addGrade } = this.props;
-    const newEntry = {
-      name: this.state.name,
-      course: this.state.course,
-      grade: parseInt(this.state.grade)
-    };
-    addGrade(newEntry);
-    this.clearFields();
+    if (this.state.update) {
+      const newEntry = {
+        name: this.state.name,
+        course: this.state.course,
+        grade: parseInt(this.state.grade),
+        id: this.state.id
+      };
+      addGrade(newEntry, true);
+      this.clearFields();
+    } else {
+      const newEntry = {
+        name: this.state.name,
+        course: this.state.course,
+        grade: parseInt(this.state.grade)
+      };
+      addGrade(newEntry, false);
+      this.clearFields();
+    }
   }
 
   handleChange(event) {
@@ -40,6 +61,12 @@ class GradeForm extends Component {
   handleReset(event) {
     event.preventDefault();
     this.clearFields();
+  }
+
+  renderHeading() {
+    return this.state.update
+      ? <h3 className="mb-4 ml-4">Update Grade</h3>
+      : <h3 className="mb-4 ml-4">Add Grade</h3>;
   }
 
   renderButton() {
@@ -63,7 +90,7 @@ class GradeForm extends Component {
       name: '',
       course: '',
       grade: '',
-      operation: 'Add'
+      update: false
     };
     this.setState(clearFields);
   }
@@ -72,7 +99,7 @@ class GradeForm extends Component {
     return (
       <React.Fragment>
         <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-          <h3 className="mb-4 ml-4">Add Grade</h3>
+          {this.renderHeading()}
           <form onSubmit={this.handleSubmit}>
             <div className="input-group mb-4 pr-3">
               <div className="input-group-prepend">

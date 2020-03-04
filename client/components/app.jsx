@@ -36,21 +36,42 @@ class App extends React.Component {
     }
   }
 
-  async addGrade(newEntry) {
-    try {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      const response = await fetch('/api/grades', {
-        method: 'POST',
-        body: JSON.stringify(newEntry),
-        headers
-      });
-      const result = await response.json();
-      this.setState({
-        grades: this.state.grades.concat(result)
-      });
-    } catch (error) {
-      console.error(error.message);
+  async addGrade(newEntry, update) {
+    if (!update) {
+      try {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const response = await fetch('/api/grades', {
+          method: 'POST',
+          body: JSON.stringify(newEntry),
+          headers
+        });
+        const result = await response.json();
+        this.setState({
+          grades: this.state.grades.concat(result)
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
+    } else {
+      try {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const response = await fetch(`/api/grades/${newEntry.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(newEntry),
+          headers
+        });
+        const result = await response.json();
+        this.setState(previous => {
+          const newGrades = previous.grades.map(grade => grade.id === result.id ? result : grade);
+          return {
+            grades: newGrades
+          };
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   }
 
@@ -75,18 +96,12 @@ class App extends React.Component {
     }
   }
 
-  async updateGrade(id) {
-    try {
-      const { grades } = this.state;
-      const [updatedGrade] = grades.filter(grade => grade.id === id);
-      this.setState({
-        currentlyEditing: updatedGrade
-      });
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-    } catch (error) {
-      console.error(error.message);
-    }
+  updateGrade(id) {
+    const { grades } = this.state;
+    const [updatedGrade] = grades.filter(grade => grade.id === id);
+    this.setState({
+      currentlyEditing: updatedGrade
+    });
   }
 
   getAverageGrade() {
