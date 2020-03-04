@@ -8,10 +8,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: []
+      grades: [],
+      currentlyEditing: null
     };
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
   }
 
   componentDidMount() {
@@ -34,21 +36,42 @@ class App extends React.Component {
     }
   }
 
-  async addGrade(newEntry) {
-    try {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      const response = await fetch('/api/grades', {
-        method: 'POST',
-        body: JSON.stringify(newEntry),
-        headers
-      });
-      const result = await response.json();
-      this.setState({
-        grades: this.state.grades.concat(result)
-      });
-    } catch (error) {
-      console.error(error.message);
+  async addGrade(newEntry, update) {
+    if (!update) {
+      try {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const response = await fetch('/api/grades', {
+          method: 'POST',
+          body: JSON.stringify(newEntry),
+          headers
+        });
+        const result = await response.json();
+        this.setState({
+          grades: this.state.grades.concat(result)
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
+    } else {
+      try {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const response = await fetch(`/api/grades/${newEntry.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(newEntry),
+          headers
+        });
+        const result = await response.json();
+        this.setState(previous => {
+          const newGrades = previous.grades.map(grade => grade.id === result.id ? result : grade);
+          return {
+            grades: newGrades
+          };
+        });
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   }
 
@@ -73,6 +96,14 @@ class App extends React.Component {
     }
   }
 
+  updateGrade(id) {
+    const { grades } = this.state;
+    const [updatedGrade] = grades.filter(grade => grade.id === id);
+    this.setState({
+      currentlyEditing: updatedGrade
+    });
+  }
+
   getAverageGrade() {
     const { grades } = this.state;
     let result = 0;
@@ -90,8 +121,15 @@ class App extends React.Component {
         <Header averageGrade={this.getAverageGrade()} />
         <main>
           <div className="row">
-            <GradeTable grades={this.state.grades} deleteGrade={this.deleteGrade} />
-            <GradeForm addGrade={this.addGrade} />
+            <GradeTable
+              grades={this.state.grades}
+              deleteGrade={this.deleteGrade}
+              updateGrade={this.updateGrade}
+            />
+            <GradeForm
+              addGrade={this.addGrade}
+              currentlyEditing={this.state.currentlyEditing}
+            />
           </div>
         </main>
       </React.Fragment>

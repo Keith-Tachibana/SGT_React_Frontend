@@ -6,30 +6,55 @@ class GradeForm extends Component {
     this.state = {
       name: '',
       course: '',
-      grade: ''
+      grade: '',
+      id: null,
+      update: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const { currentlyEditing } = this.props;
+    if (currentlyEditing !== prevProps.currentlyEditing) {
+      this.setState({
+        name: currentlyEditing.name,
+        course: currentlyEditing.course,
+        grade: currentlyEditing.grade,
+        id: currentlyEditing.id,
+        update: true
+      });
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const { addGrade } = this.props;
-    const newEntry = {
-      name: this.state.name,
-      course: this.state.course,
-      grade: parseInt(this.state.grade)
-    };
-    addGrade(newEntry);
-    this.clearFields();
+    if (this.state.update) {
+      const newEntry = {
+        name: this.state.name,
+        course: this.state.course,
+        grade: parseInt(this.state.grade),
+        id: this.state.id
+      };
+      addGrade(newEntry, true);
+      this.clearFields();
+    } else {
+      const newEntry = {
+        name: this.state.name,
+        course: this.state.course,
+        grade: parseInt(this.state.grade)
+      };
+      addGrade(newEntry, false);
+      this.clearFields();
+    }
   }
 
   handleChange(event) {
-    const target = event.target;
-    const name = target.name;
+    const { name, value } = event.target;
     this.setState({
-      [name]: target.value
+      [name]: value
     });
   }
 
@@ -38,11 +63,34 @@ class GradeForm extends Component {
     this.clearFields();
   }
 
+  renderHeading() {
+    return this.state.update
+      ? <h3 className="mb-4 ml-4">Update Grade</h3>
+      : <h3 className="mb-4 ml-4">Add Grade</h3>;
+  }
+
+  renderButton() {
+    return this.state.update
+      ? <button
+        type="submit"
+        className="ml-4 btn btn-primary"
+        name="update">
+          Update
+      </button>
+      : <button
+        type="submit"
+        className="ml-4 btn btn-success"
+        name="add">
+          Add
+      </button>;
+  }
+
   clearFields() {
     const clearFields = {
       name: '',
       course: '',
-      grade: ''
+      grade: '',
+      update: false
     };
     this.setState(clearFields);
   }
@@ -51,7 +99,7 @@ class GradeForm extends Component {
     return (
       <React.Fragment>
         <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-          <h3 className="mb-4 ml-4">Add Grade</h3>
+          {this.renderHeading()}
           <form onSubmit={this.handleSubmit}>
             <div className="input-group mb-4 pr-3">
               <div className="input-group-prepend">
@@ -104,12 +152,7 @@ class GradeForm extends Component {
               />
               <small className="text-muted form-text w-100 ml-4">Please enter a student grade from 0 to 100</small>
             </div>
-            <button
-              type="submit"
-              className="ml-4 btn btn-success"
-              name="add">
-              Add
-            </button>
+            {this.renderButton()}
             <button
               onClick={this.handleReset}
               className="ml-4 btn btn-warning"

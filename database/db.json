@@ -2,9 +2,21 @@
   "grades": [
     {
       "name": "Keith",
-      "course": "Python",
-      "grade": 85,
+      "course": "C++",
+      "grade": 100,
       "id": 1
+    },
+    {
+      "name": "Ron",
+      "course": "Math",
+      "grade": 69,
+      "id": 2
+    },
+    {
+      "name": "Vicky",
+      "course": "Java",
+      "grade": 88,
+      "id": 3
     }
   ]
 }
