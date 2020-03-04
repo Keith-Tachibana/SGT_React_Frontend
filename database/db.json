@@ -1,28 +1,22 @@
 {
   "grades": [
     {
-      "name": "Richard",
-      "course": "Pre-Algebra",
-      "grade": 54,
+      "name": "Keith",
+      "course": "C++",
+      "grade": 100,
+      "id": 1
+    },
+    {
+      "name": "Ron",
+      "course": "Math",
+      "grade": 69,
       "id": 2
     },
     {
-      "name": "Keith",
-      "course": "Algebra",
-      "grade": 97,
-      "id": 3
-    },
-    {
-      "name": "Viorika",
-      "course": "Assembly",
-      "grade": 72,
-      "id": 4
-    },
-    {
-      "name": "Johnny",
+      "name": "Vicky",
       "course": "Java",
-      "grade": 67,
-      "id": 6
+      "grade": 88,
+      "id": 3
     }
   ]
 }

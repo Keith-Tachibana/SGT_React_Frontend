@@ -7,7 +7,7 @@ class Grade extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  handleDelete(event) {
+  handleDelete() {
     const { deleteGrade, id } = this.props;
     deleteGrade(id);
   }
