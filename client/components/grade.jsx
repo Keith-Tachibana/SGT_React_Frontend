@@ -4,11 +4,17 @@ class Grade extends Component {
   constructor(props) {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   handleDelete(event) {
     const { deleteGrade, id } = this.props;
     deleteGrade(id);
+  }
+
+  handleUpdate() {
+    const { updateGrade, id } = this.props;
+    updateGrade(id);
   }
 
   render() {
@@ -19,7 +25,10 @@ class Grade extends Component {
           <td>{name}</td>
           <td>{course}</td>
           <td>{grade}</td>
-          <td><button className="btn btn-danger btn-sm float-right" onClick={this.handleDelete}><i className="fas fa-trash-alt"> Delete</i></button></td>
+          <td className="text-right">
+            <button className="btn btn-primary btn-sm mr-2" onClick={this.handleUpdate}><i className="fas fa-edit"> Edit</i></button>
+            <button className="btn btn-danger btn-sm ml-2" onClick={this.handleDelete}><i className="fas fa-trash-alt"> Delete</i></button>
+          </td>
         </tr>
       </React.Fragment>
     );

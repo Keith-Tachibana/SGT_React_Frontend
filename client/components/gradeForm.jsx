@@ -7,15 +7,15 @@ class GradeForm extends Component {
       name: '',
       course: '',
       grade: '',
-      operation: 'Add'
+      update: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
 
-  componentDidUpdate() {
-
+  componentDidUpdate(prevProps) {
+    return null;
   }
 
   handleSubmit(event) {
@@ -31,16 +31,31 @@ class GradeForm extends Component {
   }
 
   handleChange(event) {
-    const target = event.target;
-    const name = target.name;
+    const { name, value } = event.target;
     this.setState({
-      [name]: target.value
+      [name]: value
     });
   }
 
   handleReset(event) {
     event.preventDefault();
     this.clearFields();
+  }
+
+  renderButton() {
+    return this.state.update
+      ? <button
+        type="submit"
+        className="ml-4 btn btn-primary"
+        name="update">
+          Update
+      </button>
+      : <button
+        type="submit"
+        className="ml-4 btn btn-success"
+        name="add">
+          Add
+      </button>;
   }
 
   clearFields() {
@@ -110,12 +125,7 @@ class GradeForm extends Component {
               />
               <small className="text-muted form-text w-100 ml-4">Please enter a student grade from 0 to 100</small>
             </div>
-            <button
-              type="submit"
-              className="ml-4 btn btn-success"
-              name="add">
-              Add
-            </button>
+            {this.renderButton()}
             <button
               onClick={this.handleReset}
               className="ml-4 btn btn-warning"

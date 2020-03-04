@@ -13,6 +13,7 @@ class App extends React.Component {
     };
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +75,20 @@ class App extends React.Component {
     }
   }
 
+  async updateGrade(id) {
+    try {
+      const { grades } = this.state;
+      const [updatedGrade] = grades.filter(grade => grade.id === id);
+      this.setState({
+        currentlyEditing: updatedGrade
+      });
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   getAverageGrade() {
     const { grades } = this.state;
     let result = 0;
@@ -94,10 +109,11 @@ class App extends React.Component {
             <GradeTable
               grades={this.state.grades}
               deleteGrade={this.deleteGrade}
+              updateGrade={this.updateGrade}
             />
             <GradeForm
               addGrade={this.addGrade}
-              updateGrade={this.state.currentlyEditing}
+              currentlyEditing={this.state.currentlyEditing}
             />
           </div>
         </main>

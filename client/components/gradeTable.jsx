@@ -13,6 +13,7 @@ class GradeTable extends Component {
           course={grade.course}
           grade={grade.grade}
           deleteGrade={this.props.deleteGrade}
+          updateGrade={this.props.updateGrade}
         />
       );
     });

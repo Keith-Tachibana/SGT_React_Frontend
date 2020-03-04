@@ -1,52 +1,10 @@
 {
   "grades": [
     {
-      "id": 1,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 2,
-      "name": "Brendan Eich",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 3,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
       "name": "Keith",
       "course": "Algebra",
-      "grade": 99,
-      "id": 4
-    },
-    {
-      "name": "Vika",
-      "course": "C++",
-      "grade": 85,
-      "id": 5
-    },
-    {
-      "name": "Viorika",
-      "course": "Java",
-      "grade": 88,
-      "id": 6
-    },
-    {
-      "name": "Vicky",
-      "course": "Assembly",
-      "grade": 56,
-      "id": 7
-    },
-    {
-      "name": "Vik",
-      "course": "Calculus",
-      "grade": 85,
-      "id": 8
+      "grade": 80,
+      "id": 1
     }
   ]
 }
